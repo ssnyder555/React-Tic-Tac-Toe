@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Player from './components/choosePlayer';
+
+import Status from './components/Status';
 
 
 class App extends Component {
@@ -59,26 +60,37 @@ class App extends Component {
       player
     })
   };
+
+  renderBoxes() {
+    return this.state.board.map(
+
+      (box, index) =>
+
+     <div className="box" key={index}
+
+        onClick={() =>
+
+         this.handleClick(index)}>
+
+         {box}
+
+       </div>
+     )
+  }
   render() {
-     const Box = this.state.board.map(
-       (box, index) =>
 
-      <div className="box"
-
-        key={index} onClick={(e) =>
-
-          this.handleClick(index)}>{box}</div>)
 
     return (
 
       <div className="container">
 
         <h1>tic-tac-toe app</h1>
-        <Player player={(e) => this.setPlayer(e)} />
 
+        <Status player={this.state.player} setPlayer={(e) => {this.setPlayer(e) }} />
 
           <div className="board">
-            {Box}
+
+            {this.renderBoxes()}
 
           </div>
       </div>
